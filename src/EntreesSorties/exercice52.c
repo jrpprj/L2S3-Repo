@@ -3,10 +3,10 @@
 int main(int argc, char *argv[])
 {
     char c, sentence[20];
-    char X[10];
+    char yourname[10];
     int i = 0;
     printf("Ecrivez: Bonjour, je suis XXX\n");
-    scanf("Bonjour, je suis %c", X);
+    scanf("Bonjour, je suis %s", yourname);
     while ((c = getchar()) != EOF && c != '\n')
     {
         sentence[i++] = c;
@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     sentence[i] = '\0';
     if (i == 0)
     {
-        printf("Bonjour, %c\n", X);
+        printf("Bonjour, %s\n", yourname);
         return 0;
     }
     printf("Qui êtes-vous?\n");

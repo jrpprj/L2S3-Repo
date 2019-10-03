@@ -6,6 +6,7 @@ int main(int argc, char *argv[])
     int i = 0;
     printf("Ecrivez: Bonjour, monde !\n");
     scanf("Bonjour, monde !");
+    printf("%c", 125);
     while ((c = getchar()) != EOF && c != '\n')
     {
         sentence[i++] = c;
