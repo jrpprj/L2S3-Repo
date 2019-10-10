@@ -15,15 +15,15 @@ int crible(int * f)
 int cribleEr(int * f)
 {
     int j;
-    for (int i = 0; (i*i) < TAILLE; i++)
+    for (int i = 2; (i*i) < TAILLE; i++)
     {
         if (f[i] == i)
         {
-            for (j = 2; i*j < TAILLE; j++)
+            for (j = 2 ; i*j < TAILLE; j++)
             {
-                f[i*j] = j;   
+                f[i*j] = j;
             }
-        }   
+        }
     }
     return 0;
 }
@@ -33,9 +33,8 @@ int main(int argc, char *argv[])
     int t[TAILLE];
     crible(t);
     cribleEr(t);
-    int i = 0;
     int n;
-    while (i == 0)
+    while (1)
     {
         scanf("%d", &n);
         if (n < 0)
@@ -46,16 +45,15 @@ int main(int argc, char *argv[])
         {
             continue;
         }
+        if (t[n] == n && n != 1)
+        {
+            printf("%d est un nombre premier", n);
+        }
         else
         {
-            if (t[n] == n && n != 1)
-            {
-                printf("%d est un nombre premier", n);
-            }
-            else
-            {
-                printf("%d n'est pas un nombre premier", n);
-            }
+            printf("%d n'est pas un nombre premier", n);
         }
     }
+   return 0;
 }
+//  Probleme avec cribleEr, non considere
