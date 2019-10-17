@@ -13,28 +13,27 @@ int grid(int * g, int n)
     return 0;
 }
 
-int search(int * g) // trouve_candidat
+void search(int * g, int * leader) // trouve_candidat
 {
     int s = 0, i ;
-    int leader = g[0];
+    leader = &g[0];
     for (i = 0; i <= 9; i++)
     {
         if (s == 0)
         {
-            leader = g[i];
+            leader = &g[i];
             s = 1;
             continue;
         }
-        if ((g[i] == leader) && (s > 0))
+        if ((&g[i] == leader) && (s > 0)) // pb aled
         {
             ++s;
         }
-        if ((g[i] != leader) && (s > 0))
+        if ((&g[i] != leader) && (s > 0))
         {
             --s;
         }
     }
-    return leader;
 }
 
 int check(int * g, int leader) // verifie_candidat
@@ -42,31 +41,32 @@ int check(int * g, int leader) // verifie_candidat
     int s = 0, i;
     for (i = 0; i <= 9; i++)
     {
-        if (g[i] == leader)
+        if (&g[i] == leader)
         {
             s++;
         }
     }
-    return s;
+    if (s > TAILLE / 2)
+    {
+        printf("Element majoritaire: '%p'\n", leader);
+        return 0;
+    }
+    printf("Aucune valeur n'est majoritaire\n");
+    return 0;
 }
 
 int main()
 {
     srand(time(NULL));
     int t[TAILLE], n;
+    int * leader;
     scanf("%d", &n);
     grid(t, n);
     for (int i = 0; i <= 9; i++)
     {
         printf("%d, ", t[i]);
     }
-    int maj = search(t);
-    printf("Candidat = %d\n", maj);
-    int nombre = check(t, maj);
-    if (nombre > TAILLE / 2)
-    {
-        printf("Element majoritaire: '%d'\n", maj);
-        return 0;
-    }
-    printf("Aucune valeur n'est majoritaire\n");
+    search(t, &leader);
+    printf("Candidat = %p\n", leader);
+    check(t, &leader);
 }
